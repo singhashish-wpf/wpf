@@ -10,10 +10,15 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build
-      run: .\build.cmd -pack -ci -configuration Debug -prepareMachine /p:Platform=x86
+      run: .\build.cmd -pack -ci -configuration Debug -prepareMachine /p:Platform=x64
     - name: Push
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: WPF_Debug
         path: ./artifacts/packages/Debug/NonShipping
 
+    - name: Run xUnit Tests
+      run: eng\scripts\ciunittest.cmd
+          -configuration Debug
+          -prepareMachine
+          /p:Platform=x64
