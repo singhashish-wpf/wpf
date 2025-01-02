@@ -671,6 +671,7 @@
     <Compile Include="System\Windows\Controls\Page.cs " />
     <Compile Include="System\Windows\Controls\PageRanges.cs " />
     <Compile Include="System\Windows\Controls\Panel.cs" />
+    <Compile Include="System\Windows\Controls\ResponsivePanel.cs" />
     <Compile Include="System\Windows\Controls\PanningMode.cs" />
     <Compile Include="System\Windows\Controls\PasswordBox.cs" />
     <Compile Include="System\Windows\Controls\PasswordTextContainer.cs" />
