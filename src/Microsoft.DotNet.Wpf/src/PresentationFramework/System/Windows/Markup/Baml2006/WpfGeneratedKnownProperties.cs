@@ -5207,15 +5207,15 @@ namespace System.Windows.Baml2006
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
         private WpfKnownMember Create_BamlProperty_Bind()
         {
-            Type type = typeof(System.Windows.Data.BindExtension);
+            Type type = typeof(System.Windows.Data.Bind);
             var bamlMember = new WpfKnownMember( this,  // Schema Context
-                            this.GetXamlType(typeof(System.Windows.Data.BindExtension)), // DeclaringType
+                            this.GetXamlType(typeof(System.Windows.Data.Bind)), // DeclaringType
                             "Bind", // Name
-                            typeof(System.Collections.ObjectModel.Collection<System.Windows.Data.BindExtension>), // type
+                            typeof(System.Collections.ObjectModel.Collection<System.Windows.Data.Bind>), // type
                             true, // IsReadOnly
                             false // IsAttachable
                                      );
-            bamlMember.GetDelegate = delegate(object target) { return ((System.Windows.Data.BindExtension)target); };
+            bamlMember.GetDelegate = delegate(object target) { return ((System.Windows.Data.Bind)target); };
             bamlMember.IsWritePrivate = true;
             bamlMember.Freeze();
             return bamlMember;

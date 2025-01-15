@@ -1136,7 +1136,7 @@ namespace System.Windows.Markup
                 case KnownElements.BevelBitmapEffect: o = new System.Windows.Media.Effects.BevelBitmapEffect();   break;
                 case KnownElements.BezierSegment: o = new System.Windows.Media.BezierSegment();   break;
                 case KnownElements.Binding: o = new System.Windows.Data.Binding();   break;
-                case KnownElements.Bind: o = new System.Windows.Data.BindExtension();   break;
+                case KnownElements.Bind: o = new System.Windows.Data.Bind();   break;
                 case KnownElements.BitmapEffectCollection: o = new System.Windows.Media.Effects.BitmapEffectCollection();   break;
                 case KnownElements.BitmapEffectGroup: o = new System.Windows.Media.Effects.BitmapEffectGroup();   break;
                 case KnownElements.BitmapEffectInput: o = new System.Windows.Media.Effects.BitmapEffectInput();   break;
@@ -4918,7 +4918,7 @@ namespace System.Windows.Markup
             case KnownElements.CornerRadiusConverter: t = _asmFramework.GetType("System.Windows.CornerRadiusConverter"); break;
             case KnownElements.BindingBase: t = _asmFramework.GetType("System.Windows.Data.BindingBase"); break;
             case KnownElements.Binding: t = _asmFramework.GetType("System.Windows.Data.Binding"); break;
-            case KnownElements.Bind: t = _asmFramework.GetType("System.Windows.Data.BindExtension"); break;
+            case KnownElements.Bind: t = _asmFramework.GetType("System.Windows.Data.Bind"); break;
             case KnownElements.BindingExpressionBase: t = _asmFramework.GetType("System.Windows.Data.BindingExpressionBase"); break;
             case KnownElements.BindingExpression: t = _asmFramework.GetType("System.Windows.Data.BindingExpression"); break;
             case KnownElements.BindingListCollectionView: t = _asmFramework.GetType("System.Windows.Data.BindingListCollectionView"); break;
@@ -5585,7 +5585,7 @@ namespace System.Windows.Markup
             case KnownElements.BevelBitmapEffect: t = typeof(System.Windows.Media.Effects.BevelBitmapEffect); break;
             case KnownElements.BezierSegment: t = typeof(System.Windows.Media.BezierSegment); break;
             case KnownElements.Binding: t = typeof(System.Windows.Data.Binding); break;
-            case KnownElements.Bind: t = typeof(System.Windows.Data.BindExtension); break;
+            case KnownElements.Bind: t = typeof(System.Windows.Data.Bind); break;
             case KnownElements.BindingBase: t = typeof(System.Windows.Data.BindingBase); break;
             case KnownElements.BindingExpression: t = typeof(System.Windows.Data.BindingExpression); break;
             case KnownElements.BindingExpressionBase: t = typeof(System.Windows.Data.BindingExpressionBase); break;

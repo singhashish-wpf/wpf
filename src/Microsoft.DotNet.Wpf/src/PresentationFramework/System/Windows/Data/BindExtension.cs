@@ -12,15 +12,18 @@ namespace System.Windows.Data
     /// Class for Xaml markup extension for Bind.
     /// </summary>
     [MarkupExtensionReturnType(typeof(object))]
-    public class BindExtension : MarkupExtension
+    public class Bind : MarkupExtension
     {
         /// <summary>
         /// Default constructor
         /// </summary>
-        public BindExtension()
+        public Bind()
         {
         }
 
+        public Bind(string path)
+        {
+        }
         /// <summary>
         /// Return an object that should be set on the targetObject's targetProperty
         /// for this markup extension. In this case it is simply null.

@@ -11537,14 +11537,14 @@ namespace System.Windows.Baml2006
         {
             var bamlType = new WpfKnownType(this, // SchemaContext
                                               760, "Bind",
-                                              typeof(System.Windows.Data.BindExtension),
+                                              typeof(System.Windows.Data.Bind),
                                               isBamlType, useV3Rules);
-            bamlType.DefaultConstructor = delegate() { return new System.Windows.Data.BindExtension(); };
+            bamlType.DefaultConstructor = delegate() { return new System.Windows.Data.Bind(); };
             bamlType.Constructors.Add(1, new Baml6ConstructorInfo(
                             new List<Type>() { typeof(System.String) },
                             delegate(object[] arguments)
                             {
-                                return new System.Windows.Data.BindExtension(
+                                return new System.Windows.Data.Bind(
                                      );
                             }));
             bamlType.Freeze();
