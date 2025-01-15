@@ -11,7 +11,7 @@ namespace System.Windows.Baml2006
 {
     partial class WpfSharedBamlSchemaContext : XamlSchemaContext
     {
-        const int KnownTypeCount = 759;
+        const int KnownTypeCount = 760;
 
 
         private WpfKnownType CreateKnownBamlType(short bamlNumber, bool isBamlType, bool useV3Rules)
@@ -777,6 +777,7 @@ namespace System.Windows.Baml2006
                 case 757: return Create_BamlType_XmlLanguageConverter(isBamlType, useV3Rules); // type converter
                 case 758: return Create_BamlType_XmlNamespaceMapping(isBamlType, useV3Rules);
                 case 759: return Create_BamlType_ZoomPercentageConverter(isBamlType, useV3Rules);
+                case 760: return Create_BamlType_Bind(isBamlType, useV3Rules);
                 default:
                     throw new InvalidOperationException("Invalid BAML number");
             }
@@ -1582,6 +1583,7 @@ namespace System.Windows.Baml2006
                 case 4265248728 : return Create_BamlType_DynamicResourceExtensionConverter(isBamlType, useV3Rules); // type converter
                 case 4268703175 : return Create_BamlType_VectorConverter(isBamlType, useV3Rules); // type converter
                 case 4291638393 : return Create_BamlType_WeakEventManager(isBamlType, useV3Rules);
+                case 4281738393 : return Create_BamlType_Bind(isBamlType, useV3Rules);
                 default : return null;
             }
         }
@@ -11526,6 +11528,25 @@ namespace System.Windows.Baml2006
                                               typeof(System.Windows.Documents.ZoomPercentageConverter),
                                               isBamlType, useV3Rules);
             bamlType.DefaultConstructor = delegate() { return new System.Windows.Documents.ZoomPercentageConverter(); };
+            bamlType.Freeze();
+            return bamlType;
+        }
+
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        private WpfKnownType Create_BamlType_Bind(bool isBamlType, bool useV3Rules)
+        {
+            var bamlType = new WpfKnownType(this, // SchemaContext
+                                              760, "Bind",
+                                              typeof(System.Windows.Data.BindExtension),
+                                              isBamlType, useV3Rules);
+            bamlType.DefaultConstructor = delegate() { return new System.Windows.Data.BindExtension(); };
+            bamlType.Constructors.Add(1, new Baml6ConstructorInfo(
+                            new List<Type>() { typeof(System.String) },
+                            delegate(object[] arguments)
+                            {
+                                return new System.Windows.Data.BindExtension(
+                                     );
+                            }));
             bamlType.Freeze();
             return bamlType;
         }

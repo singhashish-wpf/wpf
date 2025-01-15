@@ -10,7 +10,7 @@ namespace System.Windows.Baml2006
 {
     partial class WpfSharedBamlSchemaContext: XamlSchemaContext
     {
-        const int KnownPropertyCount = 270;
+        const int KnownPropertyCount = 272;
 
 
         private WpfKnownMember CreateKnownMember(short bamlNumber)
@@ -286,6 +286,7 @@ namespace System.Windows.Baml2006
                 case 268: return Create_BamlProperty_XmlDataProvider_XmlSerializer();
                 case 269: return Create_BamlProperty_TextBox_IsReadOnly();
                 case 270: return Create_BamlProperty_RichTextBox_IsReadOnly();
+                case 271: return Create_BamlProperty_Bind();
                 default:
                     throw new InvalidOperationException("Invalid BAML number");
             }
@@ -5204,6 +5205,23 @@ namespace System.Windows.Baml2006
         }
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        private WpfKnownMember Create_BamlProperty_Bind()
+        {
+            Type type = typeof(System.Windows.Data.BindExtension);
+            var bamlMember = new WpfKnownMember( this,  // Schema Context
+                            this.GetXamlType(typeof(System.Windows.Data.BindExtension)), // DeclaringType
+                            "Bind", // Name
+                            typeof(System.Collections.ObjectModel.Collection<System.Windows.Data.BindExtension>), // type
+                            true, // IsReadOnly
+                            false // IsAttachable
+                                     );
+            bamlMember.GetDelegate = delegate(object target) { return ((System.Windows.Data.BindExtension)target); };
+            bamlMember.IsWritePrivate = true;
+            bamlMember.Freeze();
+            return bamlMember;
+        }
+
+       [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
         private WpfKnownMember Create_BamlProperty_MultiBinding_Bindings()
         {
             Type type = typeof(System.Windows.Data.MultiBinding);
