@@ -823,7 +823,8 @@ namespace System.Windows.Markup
         XmlLanguageConverter,
         XmlNamespaceMapping,
         ZoomPercentageConverter,
-        MaxElement
+        MaxElement,
+        Bind,
     }
 
     // This enum specifies the IDs we use for known CLR and DP Properties in BAML.
@@ -1127,6 +1128,7 @@ namespace System.Windows.Markup
                 case KnownElements.BeginStoryboard: o = new System.Windows.Media.Animation.BeginStoryboard();   break;
                 case KnownElements.BevelBitmapEffect: o = new System.Windows.Media.Effects.BevelBitmapEffect();   break;
                 case KnownElements.BezierSegment: o = new System.Windows.Media.BezierSegment();   break;
+                case KnownElements.Bind: o = new System.Windows.Data.Bind(); break;
                 case KnownElements.Binding: o = new System.Windows.Data.Binding();   break;
                 case KnownElements.BitmapEffectCollection: o = new System.Windows.Media.Effects.BitmapEffectCollection();   break;
                 case KnownElements.BitmapEffectGroup: o = new System.Windows.Media.Effects.BitmapEffectGroup();   break;
@@ -4433,6 +4435,10 @@ namespace System.Windows.Markup
                     else if (string.Equals(propName, "ItemHeight", StringComparison.Ordinal))
                         converterId = KnownElements.LengthConverter;
                     break;
+                case KnownElements.Bind:
+                    if (string.Equals(propName, "ConverterCulture", StringComparison.Ordinal))
+                        converterId = KnownElements.CultureInfoIetfLanguageTagConverter;
+                    break;
                 case KnownElements.Binding:
                     if (string.Equals(propName, "ConverterCulture", StringComparison.Ordinal))
                         converterId = KnownElements.CultureInfoIetfLanguageTagConverter;
@@ -4898,6 +4904,7 @@ namespace System.Windows.Markup
             case KnownElements.WrapPanel: t = _asmFramework.GetType("System.Windows.Controls.WrapPanel"); break;
             case KnownElements.CornerRadius: t = _asmFramework.GetType("System.Windows.CornerRadius"); break;
             case KnownElements.CornerRadiusConverter: t = _asmFramework.GetType("System.Windows.CornerRadiusConverter"); break;
+            case KnownElements.Bind: t = _asmFramework.GetType("System.Windows.Data.Bind"); break;
             case KnownElements.BindingBase: t = _asmFramework.GetType("System.Windows.Data.BindingBase"); break;
             case KnownElements.Binding: t = _asmFramework.GetType("System.Windows.Data.Binding"); break;
             case KnownElements.BindingExpressionBase: t = _asmFramework.GetType("System.Windows.Data.BindingExpressionBase"); break;
