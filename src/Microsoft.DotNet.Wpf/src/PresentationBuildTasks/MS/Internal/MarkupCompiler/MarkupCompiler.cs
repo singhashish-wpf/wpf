@@ -34,8 +34,18 @@ using Microsoft.Build.Tasks.Windows;
 
 namespace MS.Internal
 {
+            // Define the XBindInfo class
+        internal class XBindInfo
+        {
+            public string TargetProperty { get; set; }
+            public string PropertyPath { get; set; }
+            public int LineNumber { get; set; }
+        }
     internal sealed class MarkupCompiler
     {
+
+        private List<XBindInfo> _xBindExpressions = new List<XBindInfo>();
+
 #region ExternalAPI
 
 #region Public Properties
@@ -579,8 +589,23 @@ namespace MS.Internal
             }
         }
 
+// Add a method to collect x:Bind attributes
+internal void CollectXBindAttribute(string targetProperty, string propertyPath, int lineNumber)
+{
+    _xBindExpressions.Add(new XBindInfo
+    {
+        TargetProperty = targetProperty,
+        PropertyPath = propertyPath,
+        LineNumber = lineNumber
+    });
+}
         private void GenerateSource()
         {
+            // Process x:Bind attributes
+            foreach (var xBindInfo in _xBindExpressions)
+            {
+                ProcessXBindAttribute(xBindInfo.TargetProperty, xBindInfo.PropertyPath, xBindInfo.LineNumber);
+            }
             Debug.Assert(_codeContexts.Count == 0);
 
             CodeNamespace cnsImports = IsLanguageCSharp ? new CodeNamespace() : _ccRoot.CodeNS;
@@ -776,6 +801,27 @@ namespace MS.Internal
 #endregion ErrorHandling
 
 #region Definition Namespace processing
+        // Add a method to process x:Bind attributes
+        private void ProcessXBindAttribute(string targetProperty, string sourceProperty, int lineNumber)
+        {
+
+            CodeMemberMethod bindingMethod = new CodeMemberMethod
+            {
+                Name = $"Bind_{targetProperty}_To_{sourceProperty}",
+                Attributes = MemberAttributes.Private
+            };
+
+            CodeThisReferenceExpression thisRef = new CodeThisReferenceExpression();
+            CodePropertyReferenceExpression targetPropRef = new CodePropertyReferenceExpression(thisRef, targetProperty);
+            CodePropertyReferenceExpression sourcePropRef = new CodePropertyReferenceExpression(thisRef, sourceProperty);
+
+            CodeAssignStatement bindStatement = new CodeAssignStatement(targetPropRef, sourcePropRef);
+            bindingMethod.Statements.Add(bindStatement);
+
+            AddLinePragma(bindingMethod, lineNumber);
+            _ccRoot.CodeClass.Members.Add(bindingMethod);
+            
+        }
 
         internal void ProcessDefinitionNamespace(XamlDefTagNode xamlDefTagNode)
         {

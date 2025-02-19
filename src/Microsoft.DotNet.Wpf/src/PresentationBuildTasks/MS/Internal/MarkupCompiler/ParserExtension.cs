@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -47,6 +47,15 @@ namespace MS.Internal
 
         public override void WriteElementStart(XamlElementStartNode xamlObjectNode)
         {
+            //check if xamlObjectNode is System.Windows.Data.Bind
+            if (xamlObjectNode?.ElementType?.FullName == "System.Windows.Data.Bind")
+            {
+
+                string targetProperty = null;
+                string propertyPath = null;
+                _compiler.CollectXBindAttribute(targetProperty, propertyPath, xamlObjectNode.LineNumber);
+
+            }
             string classFullName = null;
 
             classFullName = _compiler.StartElement(ref _class, _subClass, ref _classModifier, xamlObjectNode.ElementType, string.Empty);
@@ -332,6 +341,12 @@ namespace MS.Internal
                     {
                         localAttribName = localAttribName.Substring(lastIndex + 1);
                     }
+                }
+                if (xamlUnknownAttributeNode.Name.StartsWith("Bind"))
+                {
+                    string targetProperty = xamlUnknownAttributeNode.Name.Substring("Bind:".Length);
+                    string propertyPath = xamlUnknownAttributeNode.Value;
+                    _compiler.CollectXBindAttribute(targetProperty, propertyPath, xamlUnknownAttributeNode.LineNumber);
                 }
                 // else if it is an unknown non-attached prop on a non-local tag -- instant error!
             }
